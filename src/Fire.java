@@ -50,32 +50,43 @@ public class Fire {
 
         // Implement this AND add more tests!!!
         boolean[][] visited = new boolean[forest.length][forest[0].length];
-
+        int time = 0;
         for(int row = 0; row < forest.length; row++){
             for(int col = 0; col < forest[0].length; col++){
                 if (forest[row][col] == forest[matchR][matchC]) {
-                    bfs(visited, row, col, forest);
+                    bfs(visited, row, col, forest, time);
                 }
                 
             }
         }
         return -1;
     }
-    private static void bfs(boolean[][] visited, int newRow, int newCol, char[][] forest, int time){
+    private static void bfs(boolean[][] visited, int row, int col, char[][] forest, int time){
         Queue<int[]> q = new LinkedList<>();
-        int row = forest.length;
-        int col = forest[0].length;
-        if ( newRow < 0 || newCol < 0 || newCol > col || row > forest.length || visited[row][col] || forest[newRow][newCol] == '.') return;
+        // int row = forest.length;
+        // int col = forest[0].length;
+        // if ( curRow < 0 || curRow < 0 || curCol > col || row > forest.length || visited[row][col] || forest[newRow][newCol] == '.') return;
         
         q.add(new int[]{row, col});
-
+        
         while(!q.isEmpty()) {
             int[] current = q.poll();
-            
+            int curR = current[0];
+            int curC = current[1];
             for(int[] move : moves) {
-                newRow = current[0] + move[0];
-                newCol = current[1] + move[1];
-                q.add(new int[]{newRow, newCol});
+                int newR = curR + move[0];
+                int newC = curC + move[1];
+
+                if(newR >= 0
+                    && newR < forest.length
+                    && newC >= 0
+                    && newC < forest[0].length
+                    && forest[newR][newC] != '.'
+                    && !visited[newR][newC]
+                ){
+                    q.add(new int[]{newR, newC});
+                }
+                
             }
         }
     }
