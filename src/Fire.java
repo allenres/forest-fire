@@ -46,6 +46,19 @@ public class Fire {
         // just a location. What other information might be useful?
 
         // Implement this AND add more tests!!!
+        boolean[][] visited = new boolean[forest.length][forest[0].length];
+
+        for(int row = 0; row < forest.length; row++){
+            for(int col = 0; col < forest[0].length; col++){
+                if (forest[row][col] == forest[matchR][matchC]) {
+                    bfs(visited, row, col, forest);
+                }
+                
+            }
+        }
         return -1;
+    }
+    private static void bfs(boolean[][] visited, int row, int col, char[][] forest){
+        
     }
 }
