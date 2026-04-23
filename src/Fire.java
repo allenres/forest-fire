@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Fire {
     /**
      * Returns how long it takes for all vulnerable trees to be set on fire if a
@@ -58,7 +61,22 @@ public class Fire {
         }
         return -1;
     }
-    private static void bfs(boolean[][] visited, int row, int col, char[][] forest){
+    private static void bfs(boolean[][] visited, int newRow, int newCol, char[][] forest, int time){
+        Queue<int[]> q = new LinkedList<>();
+        int row = forest.length;
+        int col = forest[0].length;
+        if ( newRow < 0 || newCol < 0 || newCol > col || row > forest.length || visited[row][col] || forest[newRow][newCol] == '.') return;
         
+        q.add(new int[]{row, col});
+
+        while(!q.isEmpty()) {
+            int[] current = q.poll();
+            
+            for(int[] move : moves) {
+                newRow = current[0] + move[0];
+                newCol = current[1] + move[1];
+                q.add(new int[]{newRow, newCol});
+            }
+        }
     }
 }
