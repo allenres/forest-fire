@@ -60,6 +60,19 @@ public class Fire {
         q.add(location);
         int time = 0;
         while(!q.isEmpty()) {
+            // r 2 c 6
+            //looing
+            // iterations
+                // r 3 c 6 // down "."
+                // r 1 c 6 // up  "."
+                // r 2 c 7 // right "t"
+                // r 2 c 5 // left "t"
+            /*
+            {1, 0},
+            {-1, 0},
+            {0, 1}, 
+            {0, -1}
+             */
             Location current = q.poll();
             int curR = current.row();
             int curC = current.col();
@@ -67,7 +80,7 @@ public class Fire {
                 int newR = curR + move[0];
                 int newC = curC + move[1];
 
-                if(newR >= 0
+                if(    newR >= 0
                     && newR < forest.length
                     && newC >= 0
                     && newC < forest[0].length
