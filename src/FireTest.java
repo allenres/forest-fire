@@ -273,7 +273,7 @@ public class FireTest {
     }
     
     @Test
-    public void testTimeToNofireSpread() {
+    public void testTimeToBurnNofireSpread() {
         char[][] forest = {
           {'t', 't', 't', 't', 't','t','t'},
           {'t', 't', 't', 't', 't','t','t'},
@@ -291,7 +291,48 @@ public class FireTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testTimeBurnOneWayPath() {
+        char[][] forest = {
+            {'t','.','.','.','.'},
+            {'t','.','.','.','.'},
+            {'t','.','.','.','.'},
+            {'t','.','.','.','.'},
+            {'t','.','.','.','.'}
+        };
 
+        int expected = 4;
+        int actual = Fire.timeToBurn(forest, 0, 0);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testMultipleDisconnectedClusters() {
+        char[][] forest = {
+            {'t','t','.','.','t','t'},
+            {'t','t','.','.','t','t'},
+            {'.','.','.','.','.','.'},
+            {'t','t','t','.','t','t'}
+        };
+
+        int expected = 2;
+        int actual = Fire.timeToBurn(forest, 0, 0);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testRowWithGaps() {
+        char[][] forest = {
+            {'t','.','t','.','t'}
+        };
+
+        int expected = 0;
+        int actual = Fire.timeToBurn(forest, 0, 0);
+
+        assertEquals(expected, actual);
+    }
 
 
 }
